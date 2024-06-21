@@ -5,21 +5,17 @@ import { UserCard } from "./components/UserCard";
 import { Pagination } from "./components/Pagination";
 
 function App() {
-  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
         const response = await fetchUsers(currentPage);
         setUsers(response || []);
-        setLoading(false);
       } catch (error) {
         console.error(error);
         setUsers([]);
-        setLoading(false);
       }
     })();
   }, [currentPage]);
